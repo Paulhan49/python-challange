@@ -9,7 +9,7 @@ month_change = []
 month_count = []
 month =[]
 # Path to collect data from the Resources folder
-budget_path = os.path.join('Resource', '03-Python_Homework_Instructions_PyBank_Resources_budget_data.csv')
+budget_path = os.path.join('Resource', 'budget_data.csv')
 
 # Read in the CSV file
 with open(budget_path, 'r') as csvfile:
@@ -20,7 +20,7 @@ with open(budget_path, 'r') as csvfile:
     row = next (csvreader)
  
  # Set variables within rows
-    total_months += 1
+    total_months = 0
     total_revenue = int(row[1])
     previous_revenue = int(row[1])
     greatest_increase = int(row[1])
@@ -33,7 +33,7 @@ with open(budget_path, 'r') as csvfile:
 
 # Count number of months in file
         month.append(row[0])
-        month_count = len(month)
+        month_count = len(month) + 1
 
 # Count the total revnue
         total_revenue += int(row[1])
@@ -65,5 +65,16 @@ print(f"Average Change: {revenue_average}")
 print(f"Greatest Inc in Profits: {greatest_increase_month}, {highest_revenue}")
 print(f"Greatest Dec in Profits: {greatest_decrease_month}, {lowest_revenue}")
 
+# Export a text file with the results
+bank_statement_analysis = os.path.join("Analysis", "bank_statement_data.txt")
+with open(bank_statement_analysis, "w") as txtfile:
+        txtfile.write(f"Financial Analysis\n")
+        txtfile.write(f"------------------------\n")
+        txtfile.write(f"Total Months: {month_count}\n")
+        txtfile.write(f"Total: ${total_revenue}\n")
+        txtfile.write(f"Average Change: {revenue_average}\n")
+        txtfile.write(f"Greatest Inc in Profits: {greatest_increase_month}, {highest_revenue}\n")
+        txtfile.write(f"Greatest Dec in Profits: {greatest_decrease_month}, {lowest_revenue}\n")
 
+    
 
